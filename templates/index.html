@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            {% for user in users %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.name }}</h5><br />
+                        <h6 class="card-subtitle mb-2 text-muted">Phone: {{ user.phone }}</h6><br />
+                        <h6 class="card-subtitle mb-2 text-muted">{{ user.address }}</h6><br />
+                    </div>
+                    <form action="/done" method="post">
+                    <ul class="list-group list-group-flush">
+                    {% for product in user.products %}
+                        <li class="list-group-item">{{ product.name }}, {{ product.units }} units &emsp; <button type="submit" name="completed_order_id" class="btn btn-primary" value="{{ product.product_id }}">Done</button></li>
+                    {% endfor %}
+                    </ul>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
